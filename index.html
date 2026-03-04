@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como eu te ajudo | Atendimento Especializado</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Fonte Plus Jakarta Sans (Super Premium e Moderna) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#F4F7F5', // Fundo principal da página
+                            card: '#FFFFFF',
+                            accent: '#E6EFE9', // Verde bem clarinho para fundos
+                            primary: '#2B3D34', // Verde floresta escuro (Header e títulos)
+                            whatsapp: '#25D366',
+                            whatsappHover: '#1ebc59'
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 30px -10px rgba(43, 61, 52, 0.08)',
+                        'inner-light': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.8)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F4F7F5;
+            -webkit-font-smoothing: antialiased;
+            color: #2B3D34;
+        }
+
+        /* Fundo curvado decorativo no topo */
+        .header-shape {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 360px;
+            background: linear-gradient(180deg, #2B3D34 0%, #1A2620 100%);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            z-index: -1;
+        }
+
+        /* Animação suave do acordeão */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item.is-open .accordion-content {
+            grid-template-rows: 1fr;
+        }
+
+        .accordion-inner {
+            overflow: hidden;
+        }
+
+        /* Rotação e estilo do ícone */
+        .chevron-icon {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-item.is-open .chevron-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-item.is-open .icon-bg {
+            background-color: #2B3D34;
+            color: white;
+        }
+
+        /* Detalhe visual (linha vertical) no item ativo */
+        .accordion-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            bottom: 20px;
+            width: 4px;
+            background-color: #2B3D34;
+            border-radius: 0 4px 4px 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .accordion-item.is-open::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex justify-center pb-12 relative overflow-x-hidden">
+
+    <!-- Shape do Cabeçalho -->
+    <div class="header-shape"></div>
+
+    <!-- Container Principal -->
+    <main class="w-full max-w-md px-5 pt-12 relative z-10">
+        
+        <!-- Foto de Perfil Premium -->
+        <div class="flex justify-center mb-5">
+            <div class="relative">
+                <div class="w-28 h-28 rounded-full bg-white p-1.5 shadow-xl">
+                    <div class="w-full h-full rounded-full overflow-hidden bg-brand-light flex items-center justify-center text-center text-xs text-gray-400">
+                        <!-- A imagem abaixo agora procura por um arquivo local chamado foto.jpg -->
+                        <img src="foto.jpg" alt="Foto da Profissional" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span style="display: none;" class="px-2">Sua foto aparecerá aqui no GitHub</span>
+                    </div>
+                </div>
+                <!-- Badge de verificação ou detalhe visual -->
+                <div class="absolute bottom-1 right-1 bg-brand-primary text-white p-1.5 rounded-full border-2 border-white shadow-sm">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cabeçalho Textos -->
+        <header class="text-center mb-10 text-white">
+            <h1 class="text-2xl font-bold mb-3 tracking-tight leading-tight">
+                Escolha seu caso e veja<br>como eu te ajudo
+            </h1>
+            <p class="text-sm text-brand-light opacity-90 mb-5 leading-relaxed px-4 font-medium">
+                Exame “na referência” não garante bem-estar. Se você sente algo, organizamos um plano e medimos a evolução.
+            </p>
+            <div class="inline-flex items-center justify-center space-x-2 text-xs font-bold text-brand-primary bg-white px-4 py-2 rounded-full shadow-lg">
+                <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
+                <span>Toque na opção para saber mais</span>
+            </div>
+        </header>
+
+        <!-- Lista de Opções (Acordeões) -->
+        <div class="space-y-4">
+
+            <!-- Opção 1 -->
+            <div class="accordion-item relative bg-white rounded-3xl shadow-premium transition-all duration-300 overflow-hidden">
+                <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none z-10 relative bg-transparent">
+                    <div class="pr-4">
+                        <h2 class="font-bold text-brand-primary text-lg mb-1">Gestação (4 semanas)</h2>
+                        <p class="text-xs font-medium text-gray-500">Azia, intestino preso, inchaço ou cansaço</p>
+                    </div>
+                    <div class="icon-bg w-10 h-10 rounded-full bg-brand-accent text-brand-primary flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                        <i data-lucide="chevron-down" class="w-5 h-5 chevron-icon"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-6 pb-7 pt-2 space-y-5">
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed border-l-2 border-brand-accent pl-3">
+                                Em 4 semanas, eu organizo sua alimentação para seu sintoma principal começar a cair (1–3 pontos na escala 0–10) com um plano que você consegue cumprir 5 dias na semana.
+                            </p>
+                            
+                            <div class="space-y-3">
+                                <!-- Bloco de Informação Cinza -->
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="user-check" class="w-3.5 h-3.5 mr-1.5"></i> Para quem é
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Gestante com azia, intestino preso, inchaço ou cansaço atrapalhando o dia.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Quem já ouviu “está normal” e mesmo assim continua ruim.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-brand-accent/40 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="gift" class="w-3.5 h-3.5 mr-1.5"></i> O que você recebe
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Plano enxuto com 2 refeições âncora + 1 lanche de proteção.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> 1 ajuste por semana para saber o que funcionou.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Medição simples: nota diária 0–10 do sintoma.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="route" class="w-3.5 h-3.5 mr-1.5"></i> Como funciona
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">1.</span> Você me diz semanas de gestação + sintoma principal + nota 0–10.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">2.</span> Você registra 2 minutos por dia e eu ajusto semanalmente.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">3.</span> No final, a gente compara dia 1 × dia 30 e decide o próximo passo.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/?text=Olá!%20Quero%20organizar%20minha%20gestação" target="_blank" class="mt-2 flex justify-center items-center w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-bold text-[15px] py-4 px-4 rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] transform hover:-translate-y-0.5">
+                                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                Quero organizar minha gestação
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção 2 -->
+            <div class="accordion-item relative bg-white rounded-3xl shadow-premium transition-all duration-300 overflow-hidden">
+                <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none z-10 relative bg-transparent">
+                    <div class="pr-4">
+                        <h2 class="font-bold text-brand-primary text-lg mb-1">Pós-parto (30 dias)</h2>
+                        <p class="text-xs font-medium text-gray-500">Parar de viver de café e belisco</p>
+                    </div>
+                    <div class="icon-bg w-10 h-10 rounded-full bg-brand-accent text-brand-primary flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                        <i data-lucide="chevron-down" class="w-5 h-5 chevron-icon"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-6 pb-7 pt-2 space-y-5">
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed border-l-2 border-brand-accent pl-3">
+                                Em 30 dias, você sai do ciclo pular refeição → café pra segurar fome → beliscar o que tiver → atacar à noite, com um plano simples.
+                            </p>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="user-check" class="w-3.5 h-3.5 mr-1.5"></i> Para quem é
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Mãe no pós-parto que vive comendo no que dá: pão, biscoito, café, resto.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Quem chega no fim do dia sem energia e com fome desregulada.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-brand-accent/40 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="gift" class="w-3.5 h-3.5 mr-1.5"></i> O que você recebe
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Plano do seu dia real com 2 refeições âncora + 1 lanche de proteção.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Plano de dia ruim: o que fazer quando não deu tempo de nada.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Ajuste semanal para reduzir recaídas.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="route" class="w-3.5 h-3.5 mr-1.5"></i> Como funciona
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">1.</span> A gente identifica seus 2 horários críticos (ex.: 16h e 21h).</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">2.</span> Você sai com opções rápidas para esses horários.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">3.</span> Você registra o básico e eu ajusto por semana para reduzir improviso.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/?text=Olá!%20Quero%20organizar%20meu%20pós-parto" target="_blank" class="mt-2 flex justify-center items-center w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-bold text-[15px] py-4 px-4 rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] transform hover:-translate-y-0.5">
+                                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                Quero organizar meu pós-parto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção 3 -->
+            <div class="accordion-item relative bg-white rounded-3xl shadow-premium transition-all duration-300 overflow-hidden">
+                <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none z-10 relative bg-transparent">
+                    <div class="pr-4">
+                        <h2 class="font-bold text-brand-primary text-lg mb-1">Introdução alimentar (8 sem.)</h2>
+                        <p class="text-xs font-medium text-gray-500">Mais variedade, menos briga</p>
+                    </div>
+                    <div class="icon-bg w-10 h-10 rounded-full bg-brand-accent text-brand-primary flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                        <i data-lucide="chevron-down" class="w-5 h-5 chevron-icon"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-6 pb-7 pt-2 space-y-5">
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed border-l-2 border-brand-accent pl-3">
+                                Em 8 semanas, seu bebê passa a aceitar 8 a 15 novos alimentos e você consegue ter 4 de 7 refeições na semana sem briga, sem virar refém de “só come X”.
+                            </p>
+                            
+                            <!-- Box de Atenção Estilizado -->
+                            <div class="bg-[#F0F5F9] border border-[#D9E6F2] rounded-2xl p-4 flex items-start">
+                                <div class="bg-blue-100 p-1.5 rounded-full mr-3 flex-shrink-0">
+                                    <i data-lucide="info" class="w-4 h-4 text-blue-700"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-[11px] font-bold text-blue-900 uppercase tracking-wider mb-1">Como eu conto "aceitou"</h4>
+                                    <p class="text-xs text-blue-800 font-medium">Um alimento entra na lista quando o bebê engole 2 bocados em 2 dias diferentes, sem tela e sem forçar.</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="user-check" class="w-3.5 h-3.5 mr-1.5"></i> Para quem é
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Bebê que recusa o novo, come pouca variedade ou está no “só come X”.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Família com briga, choro e negociação na hora de comer.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-brand-accent/40 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="gift" class="w-3.5 h-3.5 mr-1.5"></i> O que você recebe
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Rotina de refeição com regras claras.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Plano semanal de variedade (2 novos por sem. + repetição correta).</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Ajustes quando travar, sem improviso todo dia.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="route" class="w-3.5 h-3.5 mr-1.5"></i> Como funciona
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">1.</span> A gente organiza cenário e rotina.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">2.</span> Você aplica o plano semanal e registra o básico.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">3.</span> Eu ajusto quando aparecer recusa/briga para não virar regressão.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/?text=Olá!%20Quero%20destravar%20a%20alimentação%20do%20meu%20bebê" target="_blank" class="mt-2 flex justify-center items-center w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-bold text-[15px] py-4 px-4 rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] transform hover:-translate-y-0.5">
+                                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                Quero destravar a alimentação
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção 4 -->
+            <div class="accordion-item relative bg-white rounded-3xl shadow-premium transition-all duration-300 overflow-hidden">
+                <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none z-10 relative bg-transparent">
+                    <div class="pr-4">
+                        <h2 class="font-bold text-brand-primary text-lg mb-1">Saúde da Mulher</h2>
+                        <p class="text-xs font-medium text-gray-500">Intestino/inchaço, energia baixa, rotina</p>
+                    </div>
+                    <div class="icon-bg w-10 h-10 rounded-full bg-brand-accent text-brand-primary flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                        <i data-lucide="chevron-down" class="w-5 h-5 chevron-icon"></i>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-6 pb-7 pt-2 space-y-5">
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed border-l-2 border-brand-accent pl-3">
+                                Em 30 dias, você sai do “tento cortar coisas e continuo ruim” e passa a ter um plano simples para cumprir 5 dias na semana, com melhora medida na sua queixa principal.
+                            </p>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="user-check" class="w-3.5 h-3.5 mr-1.5"></i> Para quem é
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Mulher com sintomas persistentes: intestino preso, inchaço, cansaço, fome desregulada e desconfortos.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Quem tem exame “ok” e ainda assim não se sente bem.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-brand-accent/40 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="gift" class="w-3.5 h-3.5 mr-1.5"></i> O que você recebe
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Definição de 1 prioridade (o que mais atrapalha hoje).</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Plano enxuto + ajuste semanal.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">•</span> Registro simples para medir melhora sem achismo.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-2xl">
+                                    <h3 class="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2 flex items-center">
+                                        <i data-lucide="route" class="w-3.5 h-3.5 mr-1.5"></i> Como funciona
+                                    </h3>
+                                    <ul class="text-sm text-gray-600 space-y-2">
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">1.</span> Você me diz a queixa principal e há quanto tempo.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">2.</span> Você executa um plano possível e registra 2 minutos por dia.</li>
+                                        <li class="flex items-start"><span class="text-brand-primary mr-2 font-bold">3.</span> Eu ajusto semanalmente e a gente compara dia 1 × dia 30.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/?text=Olá!%20Quero%20organizar%20minha%20saúde" target="_blank" class="mt-2 flex justify-center items-center w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-bold text-[15px] py-4 px-4 rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] transform hover:-translate-y-0.5">
+                                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                Quero organizar minha saúde
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Rodapé Minimalista -->
+        <footer class="mt-12 text-center text-xs text-brand-primary/50 font-medium">
+            <p>Atendimento especializado e focado em resultados reais.</p>
+        </footer>
+
+    </main>
+
+    <!-- Script para gerenciar a lógica dos Acordeões -->
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('.accordion-item button').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.closest('.accordion-item');
+                const isOpen = item.classList.contains('is-open');
+
+                // Fecha todos os outros
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    otherItem.classList.remove('is-open');
+                });
+
+                // Abre o clicado se estava fechado
+                if (!isOpen) {
+                    item.classList.add('is-open');
+                    // Scroll suave para o item aberto para melhorar a experiência no celular
+                    setTimeout(() => {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
